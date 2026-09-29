@@ -1,0 +1,20 @@
+{
+  "name": "dsh-set-session-title",
+  "version": "0.1.1",
+  "description": "Model-facing tool that renames the calling session through the harness session-title service.",
+  "private": true,
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "license": "MIT",
+  "comment": "No dependencies on purpose: an in-box @deepseek-ai/* dependency installs a second copy into the profile and splits module identity for symbol-keyed runtime surfaces, which breaks every tool call in that profile. See lib/index.js.",
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

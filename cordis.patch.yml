@@ -1,0 +1,7 @@
+# Inserts the model-facing `set_session_title` tool into whatever composition
+# mounts this bundle. The row takes no configuration: the tool reads the
+# deployment's own title limits from the session-title service it calls, and
+# that service row (`session-title`, composed by dsh-base) stays authoritative.
+- insert:
+    - id: set-session-title
+      name: dsh-set-session-title
