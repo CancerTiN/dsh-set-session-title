@@ -29,6 +29,9 @@ This plugin adds exactly that one existing service call as a tool. It does not t
 ## Install
 
 ```sh
+# pinned to a release (recommended)
+dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-title/archive/refs/tags/v0.1.1.tar.gz
+# or track the main branch
 dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-title/archive/refs/heads/main.tar.gz
 ```
 

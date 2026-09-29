@@ -36,8 +36,11 @@ DSH 的会话标题是 log-only 的 `session/title` 事件（不占 token），�
 ## 安装
 
 ```sh
+# 固定到 release（推荐）
+dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-title/archive/refs/tags/v0.1.1.tar.gz
+# 或跟随主分支
 dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-title/archive/refs/heads/main.tar.gz
-# 本仓库直接安装也可：dsh plugin --profile <name> add github:CancerTiN/dsh-set-session-title
+# git 形式亦可：dsh plugin --profile <name> add github:CancerTiN/dsh-set-session-title
 ```
 
 `package.json` 里声明了 `dsh.bundle.patch`，所以 `add` 成功后会自动把 `dsh-set-session-title` 追加进该 profile 的 `dsh.profile.bundles`，其 patch 再把工具行 insert 进组合树。
