@@ -29,8 +29,10 @@ This plugin adds exactly that one existing service call as a tool. It does not t
 ## Install
 
 ```sh
-# recommended: a git spec resolves the same content and is immune to the tarball caveat below
-dsh plugin --profile <name> add github:CancerTiN/dsh-set-session-title
+# recommended: git spec pinned to a release tag (reproducible, and immune to the tarball caveat below)
+dsh plugin --profile <name> add github:CancerTiN/dsh-set-session-title#v0.1.1
+
+# drop the #v0.1.1 fragment to follow the default branch instead of a pinned release
 
 # a tarball URL works too — read the caveat below before picking one
 dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-title/archive/refs/tags/v0.1.1.tar.gz
@@ -38,7 +40,7 @@ dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-tit
 
 The manifest declares `dsh.bundle.patch`, so `add` appends `dsh-set-session-title` to the profile's `dsh.profile.bundles` and its patch inserts the tool row into the composed tree.
 
-> **Tarball-URL caveat.** Under the pnpm bundled with the desktop app (11.7.0), a GitHub tarball URL installs once and then fails on every later resolve that reuses the same pnpm store — `ERR_PNPM_MISSING_TARBALL_INTEGRITY`, where deleting the lockfile and `--force` both change nothing. Reproduced and reported upstream as [discussion #8294](https://github.com/deepseek-ai/deepseek-harness/discussions/8294). The git spec above is unaffected; a tarball URL is still fine when the store has not seen it (or on a newer pnpm).
+> **Tarball-URL caveat.** Under the pnpm bundled with the desktop app (11.7.0), a GitHub tarball URL installs once and then fails on every later resolve that reuses the same pnpm store — `ERR_PNPM_MISSING_TARBALL_INTEGRITY`, where deleting the lockfile and `--force` both change nothing. Reproduced and reported upstream as [discussion #8294](https://github.com/deepseek-ai/deepseek-harness/discussions/8294). A git spec is unaffected because it resolves to a commit-addressed `gitHosted` entry, which pnpm does not subject to the integrity requirement; a tarball URL is still fine when the store has not seen it (or on a newer pnpm).
 
 On 0.2.0-rc.2 the desktop app picked the tool up **without a restart** (the client-side tool schema updated mid-session and the call succeeded immediately). Other builds may need the profile restarted.
 

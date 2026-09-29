@@ -36,8 +36,10 @@ DSH 的会话标题是 log-only 的 `session/title` 事件（不占 token），�
 ## 安装
 
 ```sh
-# 推荐：git 形式，解析同一份内容，且不受下面 tarball 坑的影响
-dsh plugin --profile <name> add github:CancerTiN/dsh-set-session-title
+# 推荐：git 形式并固定到 release tag（可复现，且不受下面 tarball 坑的影响）
+dsh plugin --profile <name> add github:CancerTiN/dsh-set-session-title#v0.1.1
+
+# 去掉 #v0.1.1 后缀则改为跟随默认分支
 
 # tarball URL 也可用——但请先读下面的注意事项
 dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-title/archive/refs/tags/v0.1.1.tar.gz
@@ -47,7 +49,7 @@ dsh plugin --profile <name> add https://github.com/CancerTiN/dsh-set-session-tit
 
 安装后**不需要重启**即可生效：app 的 HMR 会认领 profile 变更（实测 0.2.0-rc.2 桌面版在 `add` 完成后，当前会话的工具清单立刻出现了 `set_session_title`）。若你的版本未热加载，重启该 profile 即可。
 
-> **tarball URL 的坑**：在桌面版内置的 pnpm 11.7.0 下，GitHub tarball URL 能装成功一次，之后**任何复用同一 pnpm store 的再次解析都会失败**（`ERR_PNPM_MISSING_TARBALL_INTEGRITY`；删 lockfile、加 `--force` 均无效）。已复现并上报为 [discussion #8294](https://github.com/deepseek-ai/deepseek-harness/discussions/8294)。上面的 git 形式不受影响。
+> **tarball URL 的坑**：在桌面版内置的 pnpm 11.7.0 下，GitHub tarball URL 能装成功一次，之后**任何复用同一 pnpm store 的再次解析都会失败**（`ERR_PNPM_MISSING_TARBALL_INTEGRITY`；删 lockfile、加 `--force` 均无效）。已复现并上报为 [discussion #8294](https://github.com/deepseek-ai/deepseek-harness/discussions/8294)。上面的 git 形式不受影响：它解析成按 commit 定位的 `gitHosted` 条目，pnpm 对其不做 integrity 校验。
 
 ## ⚠️ 零依赖是硬约束，不是风格选择
 
